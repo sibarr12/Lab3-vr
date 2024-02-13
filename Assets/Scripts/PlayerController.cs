@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public bool gameOver = false;
     private Rigidbody playerRb;
-    private float jumpForce;
+    public float jumpForce;
     public float gravityModifier;
 
     public bool isOnGround = true;
@@ -20,12 +21,18 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Space) && isOnGround){
-            playerRb.AddForce(Vector3.up * 20, ForceMode.Impulse);
+            playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isOnGround = false;
         }
     }
 
     private void OnCollisionEnter(Collision collision){
-        isOnGround = true;
+        if (collision.gameObject.CompareTag("Ground")){
+            isOnGround = true;
+        }else if (collision.gameObject.CompareTag("Obstacle")){
+            gameOver = true;
+            Debug.Log("Game Over!");
+        }
+
     }
 }
