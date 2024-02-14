@@ -10,7 +10,7 @@ public class SpawnManager : MonoBehaviour
     private Vector3 spawnPos = new Vector3(25, 0, 0);
 
     private float startDelay = 2;
-    private float repeatRate = 5;
+    private float repeatRate = 3;
     private PlayerController playerControllerScript;
 
     // Start is called before the first frame update
